@@ -9,7 +9,7 @@
 
 ## 示例
 
-![recons_7](\out\recons_7.png)
+![recons_7](https://github.com/Eric-is-good/VIT_wganGP/blob/main/out/recons_7.png)
 
 
 
@@ -34,13 +34,13 @@
 
 
 
-1. ![](\readmepic\1.jpg)
+1. ![](https://github.com/Eric-is-good/VIT_wganGP/blob/main/readmepic/1.jpg)
 
   
 
 ​     2.  vision transformer 的 z_dim 是 1000，也需要修改。
 
-![2](readmepic\2.jpg)
+![2](https://github.com/Eric-is-good/VIT_wganGP/blob/main/readmepic/2.jpg)
 
 
 
