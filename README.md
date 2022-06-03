@@ -38,7 +38,7 @@
 
   
 
-​     2.  vision transformer 的 z_dim 是 1000，也需要修改。
+​     2.  vision transformer 的 z_dim 是 1024，也需要修改。
 
 ![2](https://github.com/Eric-is-good/VIT_wganGP/blob/main/readmepic/2.jpg)
 
