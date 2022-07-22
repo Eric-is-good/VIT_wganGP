@@ -7,12 +7,14 @@
 
 ## 新增了 VAE 模型，效果要好一点，并提供预训练模型（30M）
 
-## 示例
+## wgan 生成示例
 
 ![recons_7](https://github.com/Eric-is-good/VIT_wganGP/blob/main/out/recons_7.png)
 
 
+## vae 生成示例
 
+![recons_7](https://github.com/Eric-is-good/VIT_wganGP/blob/main/out/recons_7.png)
 
 
 
