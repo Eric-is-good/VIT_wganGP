@@ -14,7 +14,7 @@
 
 ## vae 生成示例
 
-![recons_7](https://github.com/Eric-is-good/VIT_wganGP/blob/main/out/recons_7.png)
+![recons_7](https://github.com/Eric-is-good/VIT_wganGP/blob/main/readmepic/true_1.png)
 
 
 
