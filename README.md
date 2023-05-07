@@ -32,7 +32,7 @@
 
 ### 如何切换
 
-1. 进入 train_for_wgangp.py 文件，将 下图的 covg 和 covd 更换成 vitg 和 vitd 即可。
+1. 进入 train_for_wgangp.py 文件，将 下图的 covg 和 covd 更换成 vitg 和 vitd 即可，也就是注释部分互换。
 
 
 
