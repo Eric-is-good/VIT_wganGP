@@ -51,7 +51,7 @@
 ## 测试与训练
 
 1. 测试使用  generate_img.py ，不需要显卡。
-2. 训练使用  w_gp_gan.py ，需要显卡。
+2. 训练使用  train_for_wgangp.py ，需要显卡。
 
 
 
