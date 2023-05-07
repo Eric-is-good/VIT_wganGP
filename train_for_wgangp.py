@@ -9,37 +9,48 @@ from utils import *
 
 
 class Generator(nn.Module):
-    def __init__(self):
+    def __init__(self, model_name):
         super().__init__()
-        # self.vitg = VITGenerator()
-        self.covg = CovGenerator()
+        self.module = ""
+
+        if model_name == "cov":
+            self.module = CovGenerator()
+        elif model_name == "vit":
+            self.module = VITGenerator()
 
     def forward(self, noise):
-        # return self.vitg(noise)
-        return self.covg(noise)
+        return self.module(noise)
 
 
 class Discriminator(nn.Module):
-    def __init__(self):
+    def __init__(self, model_name):
         super().__init__()
-        # self.vitd = VITDiscriminator()
-        self.covd = CovDiscriminator()
+        self.module = ""
+
+        if model_name == "cov":
+            self.module = CovDiscriminator()
+        elif model_name == "vit":
+            self.module = VITDiscriminator()
 
     def forward(self, img):
-        # return self.vitd(img)
-        return self.covd(img)
+        return self.module(img)
 
 
 class WGPGAN(nn.Module):
     """ Super class to contain both Discriminator (D) and Generator (G)
     """
 
-    def __init__(self):
+    def __init__(self, model_name):
         super().__init__()
         self.__dict__.update(locals())
-        self.G = Generator()
-        self.D = Discriminator()
-        self.z_dim = 100
+        self.G = Generator(model_name)
+        self.D = Discriminator(model_name)
+        if model_name == "cov":
+            self.z_dim = 100
+        elif model_name == "vit":
+            self.z_dim = 1024
+        else:
+            raise "You can choose model_name from cov and vit"
 
 
 class WGPGANTrainer:
@@ -260,8 +271,9 @@ class WGPGANTrainer:
 
 
 class WGAN_GP_Test:
-    def __init__(self, model):
+    def __init__(self, model, model_path):
         self.model = model
+        self.model_path = model_path
         self.name = model.__class__.__name__
 
     def compute_noise(self, batch_size, z_dim):
@@ -274,7 +286,7 @@ class WGAN_GP_Test:
         self.model.load_state_dict(state)
 
     def test_img(self):
-        self.load_model("save_model/save_model.pt")
+        self.load_model(self.model_path)
         self.model.eval()
         noise = self.compute_noise(36, self.model.z_dim)
         images = self.model.G(noise)
@@ -282,15 +294,18 @@ class WGAN_GP_Test:
 
 
 if __name__ == "__main__":
-    # Load in binarized MNIST data, separate into data loaders
-    mydataset = MyDataSet("small_pics")
+    # pic preprocess
+    pic_preprocess("raw_pics", "pics", (64, 64))
+
+    # Load data
+    mydataset = MyDataSet("pics")
     train_loader = DataLoader(dataset=mydataset,
-                              batch_size=112,
+                              batch_size=64,
                               shuffle=True,
                               )
 
     # Init save_model
-    model = WGPGAN()
+    model = WGPGAN(model_name="cov")   # cov or vit
 
     # Init trainer
     trainer = WGPGANTrainer(model=model,

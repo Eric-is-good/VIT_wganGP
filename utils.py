@@ -29,16 +29,16 @@ class MyDataSet(Dataset):
         return images
 
 
-def read_path(file_pathname, small_path):
+def pic_preprocess(raw_pics, pics, size):
     i = 0
-    for filename in tqdm(os.listdir(file_pathname)):
-        img = cv2.imread(file_pathname + '/' + filename)
-        img = cv2.resize(img, (64, 64))
-        cv2.imwrite(small_path + '/' + str(i) + ".jpg", img)
+    for filename in tqdm(os.listdir(raw_pics)):
+        img = cv2.imread(raw_pics + '/' + filename)
+        img = cv2.resize(img, size)
+        cv2.imwrite(pics + '/' + str(i) + ".jpg", img)
         i += 1
 
 
 if __name__ == '__main__':
-    read_path("data","your_path")
+    pic_preprocess("raw_pics", "pics", (64, 64))
 
 

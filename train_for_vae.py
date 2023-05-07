@@ -349,7 +349,10 @@ class VAETrainer:
 
 
 if __name__ == "__main__":
-    mydataset = MyDataSet("small_pics")
+    # pic preprocess
+    pic_preprocess("raw_pics", "pics", (64, 64))
+
+    mydataset = MyDataSet("pics")
     train_loader = DataLoader(dataset=mydataset,
                               batch_size=1024,
                               shuffle=True,

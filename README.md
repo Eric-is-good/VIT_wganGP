@@ -18,49 +18,41 @@
 
 
 
+## 测试与训练
+
+1. 测试使用  generate_img.py ，不需要显卡。
+2. 训练使用  train_for_wgangp.py 或 train_for_vae.py，需要显卡。
+
+
+
 
 ## 模型切换
 
+### 我们提供了三个模型（默认是  反卷积 + wgangp）
 
-
-### 我们提供了两个模型（默认是  反卷积）
-
-1. 基于 vision transformer 的生成网络和判别网络。
-2. 基于  反卷积  的生成网络和判别网络。
+1. 基于 vision transformer 的生成网络和判别网络。（vit + wgangp）
+2. 基于  反卷积 (cov) 的生成网络和判别网络。（cov + wgangp）
+2. 基于  反卷积 (cov) 的生成网络和判别网络。（cov + vae）
 
 
 
 ### 如何切换
 
-1. 进入 train_for_wgangp.py 文件，将 下图的 covg 和 covd 更换成 vitg 和 vitd 即可，也就是注释部分互换。
+进入 train_for_wgangp.py 文件，在 main 里面，通过 model = WGPGAN(model_name="cov")  的 model_name 切换 vit 和 cov，使用 wgangp。
 
-
-
-1. ![](https://github.com/Eric-is-good/VIT_wganGP/blob/main/readmepic/1.jpg)
-
-  
-
-​     2.  vision transformer 的 z_dim 是 1024，也需要修改。
-
-![2](https://github.com/Eric-is-good/VIT_wganGP/blob/main/readmepic/2.jpg)
-
-
-
-
-
-## 测试与训练
-
-1. 测试使用  generate_img.py ，不需要显卡。
-2. 训练使用  train_for_wgangp.py ，需要显卡。
+进入 train_for_vae.py 文件使用 vae。
 
 
 
 ## 数据集
 
-1. 直接把图片放在 data 下，运行 utils 的 read_path 自动转化为 64x64 的图片大小。
+直接把图片放在 raw_pics 下，自动转化为 64x64 的图片大小，并保存在pics下 。就可以训练了。
 
 
 
 ## 模型
 
-提供一个反卷积的模型，仅仅 20 M.
+提供一个反卷积的模型，仅仅 20 M，在 model 里面，cov.pt 是 cov 的模型。
+
+vae 的模型由于大于 20 MB，被压缩成了两个文件，使用前先解压 vae.zip。
+
